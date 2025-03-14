@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Storico Prenotazioni</title>
+</head>
+<body>
+    <h2>Storico delle Prenotazioni</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Evento</th>
+                <th>Data Prenotazione</th>
+                <th>Numero Biglietti</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="prenotazione : ${prenotazioni}">
+                <td th:text="${prenotazione.evento.titolo}"></td>
+                <td th:text="${prenotazione.dataPrenotazione}"></td>
+                <td th:text="${prenotazione.numeroBiglietti}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

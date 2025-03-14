@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica Evento</title>
+</head>
+<body>
+    <h2>Modifica Evento</h2>
+    <form th:action="@{/admin/modifica/{id}(id=${evento.id})}" method="post">
+        <label for="titolo">Titolo:</label>
+        <input type="text" id="titolo" name="titolo" th:value="${evento.titolo}" required="required" />
+        <br/>
+        <label for="descrizione">Descrizione:</label>
+        <textarea id="descrizione" name="descrizione" th:value="${evento.descrizione}" required="required"></textarea>
+        <br/>
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" th:value="${evento.data}" required="required" />
+        <br/>
+        <label for="prezzo">Prezzo:</label>
+        <input type="number" id="prezzo" name="prezzo" th:value="${evento.prezzo}" required="required" step="0.01" />
+        <br/>
+        <label for="numeroBigliettiDisponibili">Biglietti Disponibili:</label>
+        <input type="number" id="numeroBigliettiDisponibili" name="numeroBigliettiDisponibili" th:value="${evento.numeroBigliettiDisponibili}" required="required" />
+        <br/>
+        <button type="submit">Modifica Evento</button>
+    </form>
+</body>
+</html>

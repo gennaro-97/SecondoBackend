@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Eventi</title>
+</head>
+<body>
+    <h2>Lista Eventi</h2>
+
+    <!-- Admin Actions -->
+    <div th:if="${#authentication.authorities.contains('ROLE_ADMIN')}">
+        <a th:href="@{/admin/crea}">Aggiungi Evento</a>
+    </div>
+
+    <!-- Event List -->
+    <table>
+        <thead>
+            <tr>
+                <th>Titolo</th>
+                <th>Descrizione</th>
+                <th>Data</th>
+                <th>Prezzo</th>
+                <th>Biglietti Disponibili</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="evento : ${eventi}">
+                <td th:text="${evento.titolo}"></td>
+                <td th:text="${evento.descrizione}"></td>
+                <td th:text="${evento.data}"></td>
+                <td th:text="${evento.prezzo}"></td>
+                <td th:text="${evento.numeroBigliettiDisponibili}"></td>
+                <td>
+                    <!-- Admin Actions: Modifica e Elimina -->
+                    <div th:if="${#authentication.authorities.contains('ROLE_ADMIN')}">
+                        <a th:href="@{/admin/modifica/{id}(id=${evento.id})}">Modifica</a>
+                        <a th:href="@{/admin/elimina/{id}(id=${evento.id})}" th:onclick="return confirm('Sei sicuro di voler eliminare questo evento?')">Elimina</a>
+                    </div>
+
+                    <!-- User Action: Prenota -->
+                    <div th:if="${#authentication.authorities.contains('ROLE_USER')}">
+                        <a th:href="@{/user/prenotazioni/prenota/{eventoId}(eventoId=${evento.id})}">Prenota</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
